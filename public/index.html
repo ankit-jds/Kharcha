@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kharcha</title>
+
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+  </head>
+
+  <body>
+    <section class="m-4">
+      <h2 class="font-bold text-2xl">Kharcha</h2>
+
+      <div class="flex flex-col pb-2">"hello"</div>
+      <form action="" class="mt-4" id="kharcha_form">
+        <!-- For Old Records -->
+        <div class="pl-6 p-2">
+          <label
+            for="old_records"
+            class="
+              bg-orange-400
+              text-black
+              font-medium
+              px-2
+              rounded-lg
+              inline-flex
+              items-center
+            "
+          >
+            <input
+              class="text-l h-4 w-4 mr-1"
+              type="checkbox"
+              name="old_records"
+              id="old_records"
+              value="old_records"
+            />
+            Old Records
+          </label>
+        </div>
+
+        <!-- For Old Record Date -->
+        <section id="old_record_date_wrap"></section>
+
+        <!-- For Categories -->
+        <div class="pl-6 p-2">
+          <p class="">Categories</p>
+          <!-- Travel checkbox -->
+          <label
+            for="travel"
+            class="
+              bg-slate-600
+              text-white
+              px-2
+              rounded-lg
+              inline-flex
+              items-center
+            "
+          >
+            <input
+              class="text-l h-4 w-4 mr-1"
+              type="radio"
+              name="categories"
+              id="travel"
+              value="travel"
+              required
+            />
+            Travel
+          </label>
+          <!-- Eating/Food Checkbox -->
+          <label
+            for="food"
+            class="
+              bg-slate-600
+              text-white
+              px-2
+              rounded-lg
+              inline-flex
+              items-center
+            "
+          >
+            <input
+              class="text-l h-4 w-4 mr-1"
+              type="radio"
+              name="categories"
+              id="food"
+              value="food"
+              required
+            />
+            Food
+          </label>
+
+          <!-- Shopping -->
+          <label
+            for="shopping"
+            class="
+              bg-slate-600
+              text-white
+              px-2
+              rounded-lg
+              inline-flex
+              items-center
+            "
+          >
+            <input
+              class="text-l h-4 w-4 mr-1"
+              type="radio"
+              name="categories"
+              id="shopping"
+              value="shopping"
+              required
+            />
+            Shopping
+          </label>
+        </div>
+
+        <!-- For Category details -->
+        <div class="" id="category_details"></div>
+
+        <!-- For Payment Method -->
+        <div class="pl-6 p-2">
+          <p class="">Payment Method</p>
+          <!-- GPay checkbox -->
+          <label
+            for="gpay"
+            class="
+              bg-slate-600
+              text-white
+              px-2
+              rounded-lg
+              inline-flex
+              items-center
+            "
+          >
+            <input
+              class="text-l h-4 w-4 mr-1"
+              type="radio"
+              name="payment_method"
+              id="gpay"
+              value="gpay"
+              required
+            />
+            GPay
+          </label>
+          <!-- AmazonPay Checkbox -->
+          <label
+            for="amazonpay"
+            class="
+              bg-slate-600
+              text-white
+              px-2
+              rounded-lg
+              inline-flex
+              items-center
+            "
+          >
+            <input
+              class="text-l h-4 w-4 mr-1"
+              type="radio"
+              name="payment_method"
+              id="amazonpay"
+              value="amazonpay"
+              required
+            />
+            AmazonPay
+          </label>
+
+          <!-- Cash -->
+          <label
+            for="cash"
+            class="
+              bg-slate-600
+              text-white
+              px-2
+              rounded-lg
+              inline-flex
+              items-center
+            "
+          >
+            <input
+              class="text-l h-4 w-4 mr-1"
+              type="radio"
+              name="payment_method"
+              id="cash"
+              value="cash"
+              required
+            />
+            Cash
+          </label>
+
+          <!-- Friend -->
+          <label
+            for="friend"
+            class="
+              bg-slate-600
+              text-white
+              px-2
+              rounded-lg
+              inline-flex
+              items-center
+            "
+          >
+            <input
+              class="text-l h-4 w-4 mr-1"
+              type="radio"
+              name="payment_method"
+              id="friend"
+              value="friend"
+              required
+            />
+            Friend
+          </label>
+        </div>
+
+        <!-- For Paid by (Only if Payment Method by Friend) -->
+        <div class="pl-6 p-2" id="paid_by">
+          <p class="">Paid by</p>
+          <select
+            class="w-full outline outline-black outline-1"
+            name="paid_by"
+            disabled
+          >
+            <option value="myself" selected>Myself</option>
+            <option value="ravindra_waghmare">Ravindra Waghmare</option>
+            <option value="anand_suryawanshi">Anand Suryawanshi</option>
+            <option value="pradip_sable">Pradip Sable</option>
+            <option value="amit_admane">Amit Admane</option>
+          </select>
+        </div>
+
+        <!-- For Amount Input -->
+        <div class="pl-6 p-2">
+          <label for="amount" class="block">
+            <p class="">Amount</p>
+            <input
+              class="text-l outline outline-1 outline-black w-full"
+              type="number"
+              name="amount"
+              id="amount"
+              required
+            />
+          </label>
+        </div>
+
+        <!-- For Save Button -->
+        <div class="pl-6 p-2">
+          <input
+            class="w-full bg-green-400 rounded-md"
+            type="submit"
+            id="save"
+            name="save"
+            value="$AVE"
+          />
+        </div>
+      </form>
+    </section>
+    <script src="main.js"></script>
+  </body>
+</html>
