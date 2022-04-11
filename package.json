@@ -19,8 +19,9 @@
   },
   "homepage": "https://github.com/ankit-jds/Kharcha#readme",
   "dependencies": {
+    "autoprefixer": "^10.4.4",
     "firebase": "^9.6.9",
-    "autoprefixer": "^10.4.4"
+    "firebase-admin": "^10.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

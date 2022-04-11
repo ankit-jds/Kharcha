@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kharcha</title>
 
-    <!-- <link rel="stylesheet" href="./style.css"> -->
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kharcha</title>
 
-  <body>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+
+  <!-- <link rel="stylesheet" href="./style.css"> -->
+</head>
+
+<body>
+  <section class="hidden" id="main_page">
     <section class="m-4">
       <h2 class="font-bold text-2xl">Kharcha</h2>
 
-      <div class="flex flex-col pb-2">"hello"</div>
-      <form action="" class="mt-4" id="kharcha_form">
+      <form action="https://api.sheetmonkey.io/form/nVyZQoDeB7S83T84xTNJju" method="post" class="mt-4"
+        id="kharcha_form">
         <!-- For Old Records -->
         <div class="pl-6 p-2">
-          <label
-            for="old_records"
-            class="
-              bg-orange-400
-              text-black
-              font-medium
-              px-2
-              rounded-lg
-              inline-flex
-              items-center
-            "
-          >
-            <input
-              class="text-l h-4 w-4 mr-1"
-              type="checkbox"
-              name="old_records"
-              id="old_records"
-              value="old_records"
-            />
+          <label for="old_records" class="
+                bg-orange-400
+                text-black
+                font-medium
+                px-2
+                rounded-lg
+                inline-flex
+                items-center
+              ">
+            <input class="text-l h-4 w-4 mr-1" type="checkbox" name="old_records" id="old_records"
+              value="old_records" />
             Old Records
           </label>
         </div>
@@ -47,70 +51,40 @@
         <div class="pl-6 p-2">
           <p class="">Categories</p>
           <!-- Travel checkbox -->
-          <label
-            for="travel"
-            class="
-              bg-slate-600
-              text-white
-              px-2
-              rounded-lg
-              inline-flex
-              items-center
-            "
-          >
-            <input
-              class="text-l h-4 w-4 mr-1"
-              type="radio"
-              name="categories"
-              id="travel"
-              value="travel"
-              required
-            />
+          <label for="travel" class="
+                bg-slate-600
+                text-white
+                px-2
+                rounded-lg
+                inline-flex
+                items-center
+              ">
+            <input class="text-l h-4 w-4 mr-1" type="radio" name="categories" id="travel" value="travel" required />
             Travel
           </label>
           <!-- Eating/Food Checkbox -->
-          <label
-            for="food"
-            class="
-              bg-slate-600
-              text-white
-              px-2
-              rounded-lg
-              inline-flex
-              items-center
-            "
-          >
-            <input
-              class="text-l h-4 w-4 mr-1"
-              type="radio"
-              name="categories"
-              id="food"
-              value="food"
-              required
-            />
+          <label for="food" class="
+                bg-slate-600
+                text-white
+                px-2
+                rounded-lg
+                inline-flex
+                items-center
+              ">
+            <input class="text-l h-4 w-4 mr-1" type="radio" name="categories" id="food" value="food" required />
             Food
           </label>
 
           <!-- Shopping -->
-          <label
-            for="shopping"
-            class="
-              bg-slate-600
-              text-white
-              px-2
-              rounded-lg
-              inline-flex
-              items-center
-            "
-          >
-            <input
-              class="text-l h-4 w-4 mr-1"
-              type="radio"
-              name="categories"
-              id="shopping"
-              value="shopping"
-              required
-            />
+          <label for="shopping" class="
+                bg-slate-600
+                text-white
+                px-2
+                rounded-lg
+                inline-flex
+                items-center
+              ">
+            <input class="text-l h-4 w-4 mr-1" type="radio" name="categories" id="shopping" value="shopping" required />
             Shopping
           </label>
         </div>
@@ -122,93 +96,54 @@
         <div class="pl-6 p-2">
           <p class="">Payment Method</p>
           <!-- GPay checkbox -->
-          <label
-            for="gpay"
-            class="
-              bg-slate-600
-              text-white
-              px-2
-              rounded-lg
-              inline-flex
-              items-center
-            "
-          >
-            <input
-              class="text-l h-4 w-4 mr-1"
-              type="radio"
-              name="payment_method"
-              id="gpay"
-              value="gpay"
-              required
-            />
+          <label for="gpay" class="
+                bg-slate-600
+                text-white
+                px-2
+                rounded-lg
+                inline-flex
+                items-center
+              ">
+            <input class="text-l h-4 w-4 mr-1" type="radio" name="payment_method" id="gpay" value="gpay" required />
             GPay
           </label>
           <!-- AmazonPay Checkbox -->
-          <label
-            for="amazonpay"
-            class="
-              bg-slate-600
-              text-white
-              px-2
-              rounded-lg
-              inline-flex
-              items-center
-            "
-          >
-            <input
-              class="text-l h-4 w-4 mr-1"
-              type="radio"
-              name="payment_method"
-              id="amazonpay"
-              value="amazonpay"
-              required
-            />
+          <label for="amazonpay" class="
+                bg-slate-600
+                text-white
+                px-2
+                rounded-lg
+                inline-flex
+                items-center
+              ">
+            <input class="text-l h-4 w-4 mr-1" type="radio" name="payment_method" id="amazonpay" value="amazonpay"
+              required />
             AmazonPay
           </label>
 
           <!-- Cash -->
-          <label
-            for="cash"
-            class="
-              bg-slate-600
-              text-white
-              px-2
-              rounded-lg
-              inline-flex
-              items-center
-            "
-          >
-            <input
-              class="text-l h-4 w-4 mr-1"
-              type="radio"
-              name="payment_method"
-              id="cash"
-              value="cash"
-              required
-            />
+          <label for="cash" class="
+                bg-slate-600
+                text-white
+                px-2
+                rounded-lg
+                inline-flex
+                items-center
+              ">
+            <input class="text-l h-4 w-4 mr-1" type="radio" name="payment_method" id="cash" value="cash" required />
             Cash
           </label>
 
           <!-- Friend -->
-          <label
-            for="friend"
-            class="
-              bg-slate-600
-              text-white
-              px-2
-              rounded-lg
-              inline-flex
-              items-center
-            "
-          >
-            <input
-              class="text-l h-4 w-4 mr-1"
-              type="radio"
-              name="payment_method"
-              id="friend"
-              value="friend"
-              required
-            />
+          <label for="friend" class="
+                bg-slate-600
+                text-white
+                px-2
+                rounded-lg
+                inline-flex
+                items-center
+              ">
+            <input class="text-l h-4 w-4 mr-1" type="radio" name="payment_method" id="friend" value="friend" required />
             Friend
           </label>
         </div>
@@ -216,11 +151,7 @@
         <!-- For Paid by (Only if Payment Method by Friend) -->
         <div class="pl-6 p-2" id="paid_by">
           <p class="">Paid by</p>
-          <select
-            class="w-full outline outline-black outline-1"
-            name="paid_by"
-            disabled
-          >
+          <select class="w-full outline outline-black outline-1" name="paid_by" disabled>
             <option value="myself" selected>Myself</option>
             <option value="ravindra_waghmare">Ravindra Waghmare</option>
             <option value="anand_suryawanshi">Anand Suryawanshi</option>
@@ -233,28 +164,70 @@
         <div class="pl-6 p-2">
           <label for="amount" class="block">
             <p class="">Amount</p>
-            <input
-              class="text-l outline outline-1 outline-black w-full"
-              type="number"
-              name="amount"
-              id="amount"
-              required
-            />
+            <input class="text-l outline outline-1 outline-black w-full" type="number" name="amount" id="amount"
+              required />
           </label>
         </div>
 
         <!-- For Save Button -->
         <div class="pl-6 p-2">
-          <input
-            class="w-full bg-green-400 rounded-md"
-            type="submit"
-            id="save"
-            name="save"
-            value="$AVE"
-          />
+          <button class="w-full bg-green-400 rounded-md" type="submit" id="save" name="save" value="$AVE">SAVE</button>
         </div>
       </form>
     </section>
-    <script src="main.js"></script>
-  </body>
+  </section>
+
+  <section class="hidden m-4" id="login_page">
+    <section class="" style="height: 100%">
+      <form action="#" id="login" class="register_form">
+        <h1 class="font-bold text-2xl">Log In</h1>
+        <br />
+        <!-- <h3 class="description hide"> 
+            Changing Password requires that the user has recently logged in, so, please login again to change the password.
+        </h3> -->
+
+        <!-- For email input -->
+        <div class="pl-6 p-2">
+          <label class="block">
+            <p>Email ID</p>
+            <input class="text-l outline outline-1 outline-black w-full" type="email" id="email" required />
+          </label>
+        </div>
+
+        <!-- For password input -->
+        <div class="pl-6 p-2">
+          <label>Password</label>
+          <input class="text-l outline outline-1 outline-black w-full" type="password" minlength="6" maxlength="100"
+            id="password" required />
+          <div>
+            <label class="cursor-pointer">
+              <div class="inline-flex p-1 roun rounded-md items-center justify-center">
+                <input class="scale-125" type="checkbox" name="showPassword" id="showPassword" autocomplete="off" />
+              </div>
+              <p class="inline">Show Password</p>
+            </label>
+          </div>
+        </div>
+
+        <!-- For login Button -->
+        <div class="pl-6 p-2" id="login_button">
+          <button id="submit"
+            class="block w-full p-2 rounded-full text-lg font-black border border-solid border-black bg-gray-300">LOGIN</button>
+        </div>
+      </form>
+    </section>
+  </section>
+
+  <section class="m-4" id="view">
+    <p class="text-2xl font-bold mb-3 mt-12">View Transactions</p>
+    <table id="view_table">
+
+    </table>
+  </section>
+
+  <div class="inline-block rounded-lg p-1 bg-slate-400 text-lg font-bold cursor-pointer" id="logout">LOGOUT</div>
+
+  <script src="main.js"></script>
+</body>
+
 </html>

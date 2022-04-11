@@ -1,11 +1,24 @@
 // importing style.css for tailwindCSS bundling with webpack.
 import "./style.css";
+// import "https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css";
+// import "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js";
+// import "https://code.jquery.com/jquery-3.6.0.slim.min.js";
+
+
 console.log("Style is imported...");
+
+// import { google } from "googleapis";
+
 //
 // // Import the functions you need from the SDKs you need
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
+} from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAnalytics } from "firebase/analytics";
 
 // // TODO: Add SDKs for Firebase products that you want to use
@@ -38,10 +51,80 @@ async function writeData(path, data) {
   return "Data is written...";
 }
 
+function toggle_the_hide(element_id, hide = true) {
+  console.log(hide, element_id);
+  let element = document.getElementById(`${element_id}`);
+  console.log(element);
+  if (element && hide) {
+    element.classList.add("hidden");
+    // console.log("hidden");
+  } else if (element) {
+    element.classList.remove("hidden");
+    // console.log("shown");
+  } else {
+    console.log("No such element exists.");
+  }
+}
+
+onAuthStateChanged(auth, (user) => {
+  // console.log(user.metadata);
+
+  console.log("auth state is changed.");
+  if (user) {
+    console.log("user is logged in...");
+
+    // hide the login section
+    toggle_the_hide("login_page");
+
+    // show the main section
+    toggle_the_hide("main_page", false);
+  } else {
+    // hide the main section
+    toggle_the_hide("main_page");
+
+    // show the login section
+    toggle_the_hide("login_page", false);
+
+    console.log("no user is logged in..");
+  }
+});
+
+function showPassword() {
+  // console.log("func started");
+  var x = [document.getElementById("password")];
+  for (let index = 0; index < x.length; index++) {
+    const password = x[index];
+    if (password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
+  }
+}
+
+function loginUser(e) {
+  console.log(getdatetime(), "LOGIN....");
+  e.preventDefault();
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      localStorage.setItem("userUID", user.uid);
+      console.log(user.uid, getdatetime());
+
+      toggle_the_hide("login_page");
+      toggle_the_hide("main_page", false);
+    })
+    .catch((error) => {
+      alert(error);
+      console.error(error);
+    });
+}
 // Starts from here...
 console.log("This is the console log from index.js ");
 
-// A function to get the now() datetime or a specific date in dd/mm/yyyy format.
+// A function to get the getdatetime() datetime or a specific date in dd/mm/yyyy format.
 function getdatetime(date = "now") {
   let datetime;
   if (date === "now") {
@@ -64,6 +147,38 @@ function getdatetime(date = "now") {
     time: datetime[1].trim(),
   };
 }
+
+window.onload = () => {
+  console.log("window is loaded...");
+
+  let show_password = document.getElementById("showPassword");
+  if (show_password) {
+    console.log("eveent");
+    show_password.addEventListener("click", () => {
+      console.log("eveent");
+      showPassword();
+    });
+  }
+
+  let login_form = document.getElementById("login");
+  if (login_form) {
+    login_form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      console.log("Login form is submitted....");
+      loginUser(e);
+    })
+  }
+
+  let logout_btn = document.getElementById("logout");
+  if (logout_btn) {
+    logout_btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log("Logout btn is clicked...");
+      signOut(auth);
+    })
+  }
+
+};
 
 // Kharcha form object
 // this is the object that will be saved to the firebase realtime database.
@@ -344,5 +459,115 @@ if (kharcha_form) {
       .split("/")
       .join("-")}_${now_time.time}`;
     writeData(path, kharcha_form_obj);
+
+    fetch('https://api.sheetmonkey.io/form/nVyZQoDeB7S83T84xTNJju', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(kharcha_form_obj),
+    }).then((result) => {
+      // Handle the result
+      console.log(result);
+    });
+    // kharcha_form.reset();
+    location.href = "/";
+    alert("Your transaction is recorded...")
+
   });
 }
+
+$.fn.dataTable.render.moment = function (from, to, locale) {
+  // Argument shifting
+  if (arguments.length === 1) {
+    locale = 'en';
+    to = 'DD/MM/YYYY';
+    from = 'DD/MM/YYYY';
+  }
+  else if (arguments.length === 2) {
+    locale = 'en';
+  }
+
+  return function (d, type, row) {
+    if (!d) {
+      return type === 'sort' || type === 'type' ? 0 : d;
+    }
+
+    var m = window.moment(d, from, locale, true);
+
+    // Order and type get a number value from Moment, everything else
+    // sees the rendered value
+    return m.format(type === 'sort' || type === 'type' ? 'x' : to);
+  };
+};
+
+
+
+const all_transactions_ref = ref(database, 'all_transactions');
+onValue(all_transactions_ref, (snapshot) => {
+  const data = snapshot.val();
+  console.log(data);
+
+  let data_keys = Object.keys(data);
+  let structured_data = [];
+  data_keys.forEach((key) => {
+    console.log(key);
+    let transactionId = key;
+    let transaction = data[key];
+
+    let { amount, category, category_details, date, paid_by, payment_method } = transaction;
+    structured_data.push([date, category, category_details, payment_method, paid_by, amount]);
+
+    console.log(structured_data);
+  });
+
+  let view_table = document.getElementById("view_table");
+  if (view_table) {
+    $(document).ready(function () {
+      console.log("view start jquery*");
+      $('#view_table').DataTable({
+        data: structured_data,
+        "bDestroy": true,
+        columns: [
+          {
+            title: "Date",
+            render: $.fn.dataTable.render.moment('M/D/YYYY')
+          },
+          {
+            title: "Category",
+            render: function (structured_data, type) {
+              return `<p class="">${structured_data}</p>`;
+            }
+          },
+          {
+            title: "Category Details",
+            render: function (structured_data, type) {
+              return `<p class="">${JSON.stringify(structured_data)}</p>`;
+            }
+          },
+          {
+            title: "Payment Method",
+            render: function (structured_data, type) {
+              return `<p class="">${structured_data}</p>`;
+            }
+          },
+          {
+            title: "Paid by",
+            render: function (structured_data, type) {
+              return `<p class="" > ${structured_data}</p> `;
+            }
+          },
+          {
+            title: "Amount",
+            render: function (structured_data, type) {
+              return `<p class="" > ${structured_data}</p> `;
+            }
+          }
+        ]
+      })
+    })
+  }
+  // updateStarCount(postElement, data);
+});
+
+
